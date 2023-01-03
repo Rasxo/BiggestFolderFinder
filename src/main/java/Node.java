@@ -34,10 +34,6 @@ public class Node {
         this.size = size;
     }
 
-    private int getLevel() {
-        return level;
-    }
-
     private void setLevel(int level) {
         this.level = level;
     }
@@ -48,7 +44,7 @@ public class Node {
         String size = SizeCalculator.getHumanReadableSize(getSize(), true);
         builder.append(folder.getName()).append(" - ").append(size).append(System.lineSeparator()).append("\t");
         for (Node child : children) {
-            String numSpaces = "\t".repeat(getLevel());
+            String numSpaces = "\t".repeat(level);
             builder.append(numSpaces).append(child.toString());
         }
         return builder.toString();
