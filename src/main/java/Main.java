@@ -4,7 +4,7 @@ import java.util.concurrent.ForkJoinPool;
 public class Main {
 
     private static String[] sizeNames =
-            {"b", "kb", "Mb", "Gb"};
+            {"b", "kb", "Mb", "Gb", "Tb"};
 
     public static void main(String[] args) {
 
