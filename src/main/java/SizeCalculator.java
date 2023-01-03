@@ -17,7 +17,6 @@ public class SizeCalculator {
             if (string.contains(sizeNames[i])) {
                 double value = Double.parseDouble(string.replaceAll("[a-zA-Z]", ""));
                 result = (long) (value * Math.pow(1024, i));
-                break;
             }
         }
         return result;
