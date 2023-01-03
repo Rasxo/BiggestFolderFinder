@@ -1,5 +1,4 @@
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.concurrent.ForkJoinPool;
 
 public class Main {
