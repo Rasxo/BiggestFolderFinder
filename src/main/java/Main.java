@@ -1,4 +1,5 @@
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.concurrent.ForkJoinPool;
 
 public class Main {
@@ -20,8 +21,10 @@ public class Main {
 //        System.out.println(getFolderSize(file));
 
         long duration = System.currentTimeMillis() - start;
+        System.out.println("Размер папки / файла: " + size);
         System.out.println("Размер папки / файла: " + getHumanReadableSize(size));
-        System.out.println(duration + " ms");
+        System.out.println("Размер папки / файла: " + getSizeFromHumanReadable(getHumanReadableSize(size)));
+        System.out.println("Время на выполнение расчета: " + duration + " ms");
 
         //90833099156
         //37963 ms
@@ -47,6 +50,17 @@ public class Main {
         int power = (int) (Math.log(length) / Math.log(1024));
         double value = length / Math.pow(1024, power);
         double roundedValue = Math.round(value * 100) / 100.;
-        return roundedValue + " " + sizeNames[power];
+        return value + " " + sizeNames[power]; // для получения ответа в округленном виде - поменять value на roundedValue
+    }
+
+    public static long getSizeFromHumanReadable(String string) {
+        long result = 0L;
+        for (int i = 0; i <sizeNames.length; i++) {
+            if (string.contains(sizeNames[i])) {
+                double value = Double.parseDouble(string.replaceAll("[a-zA-Z]", ""));
+                result = (long) (value * Math.pow(1024, i));
+            }
+        }
+        return result;
     }
 }
