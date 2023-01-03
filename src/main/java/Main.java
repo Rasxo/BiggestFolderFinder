@@ -4,12 +4,10 @@ import java.util.concurrent.ForkJoinPool;
 public class Main {
 
     public static void main(String[] args) {
-
-        for (int i = 0; i < args.length; i++) {
-            System.out.println(args[i]);
-        }
-
-        System.exit(0);
+//        ParametersBag parametersBag = new ParametersBag(args);
+//
+//        String folderPath = parametersBag.getPath();
+//        long sizeLimit = parametersBag.getLimit();
 
         String folderPath = "D:\\Torrents";
         long sizeLimit = 5L * 1_073_741_824L;
