@@ -3,6 +3,9 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Main {
 
+    private static String[] sizeNames =
+            {"b", "kb", "Mb", "Gb"};
+
     public static void main(String[] args) {
 
         String folderPath = "D:\\Разобрать\\Steam";
@@ -13,11 +16,11 @@ public class Main {
         FolderSizeCalculator calculator = new FolderSizeCalculator(file);
         ForkJoinPool pool = new ForkJoinPool();
         long size = pool.invoke(calculator);
-        System.out.println(size);
 
 //        System.out.println(getFolderSize(file));
 
         long duration = System.currentTimeMillis() - start;
+        System.out.println("Размер папки / файла: " + getHumanReadableSize(size));
         System.out.println(duration + " ms");
 
         //90833099156
@@ -38,5 +41,12 @@ public class Main {
             sum += getFolderSize(file);
         }
         return sum;
+    }
+
+    public static String getHumanReadableSize(long length) {
+        int power = (int) (Math.log(length) / Math.log(1024));
+        double value = length / Math.pow(1024, power);
+        double roundedValue = Math.round(value * 100) / 100.;
+        return roundedValue + " " + sizeNames[power];
     }
 }
