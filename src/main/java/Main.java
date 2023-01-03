@@ -9,7 +9,7 @@ public class Main {
         long sizeLimit = 5L * 1_073_741_824L;
 
         File file = new File(folderPath);
-        Node root = new Node(file);
+        Node root = new Node(file, sizeLimit);
 
         long start = System.currentTimeMillis();
 
@@ -23,7 +23,7 @@ public class Main {
         System.out.println("Размер папки / файла: " +
                 SizeCalculator.getSizeFromHumanReadable(SizeCalculator.getHumanReadableSize(root.getSize(), false)));
         System.out.println("Время на выполнение расчета: " + duration + " ms");
-        System.out.println("Содержимое c лимитом: " + System.lineSeparator() + root.toString(sizeLimit));
+        System.out.println("Содержимое c лимитом: " + System.lineSeparator() + root);
 
     }
 
