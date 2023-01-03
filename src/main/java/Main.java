@@ -4,13 +4,13 @@ import java.util.concurrent.ForkJoinPool;
 public class Main {
 
     public static void main(String[] args) {
-//        ParametersBag parametersBag = new ParametersBag(args);
-//
-//        String folderPath = parametersBag.getPath();
-//        long sizeLimit = parametersBag.getLimit();
+        ParametersBag parametersBag = new ParametersBag(args);
 
-        String folderPath = "D:\\Torrents";
-        long sizeLimit = 5L * 1_073_741_824L;
+        String folderPath = parametersBag.getPath();
+        long sizeLimit = parametersBag.getLimit();
+
+//        String folderPath = "D:\\Torrents";
+//        long sizeLimit = 5L * 1_073_741_824L;
 
         File file = new File(folderPath);
         Node root = new Node(file, sizeLimit);
