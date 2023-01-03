@@ -49,4 +49,18 @@ public class Node {
         }
         return builder.toString();
     }
+
+    public String toString(long limit) {
+        StringBuilder builder = new StringBuilder();
+        String size = SizeCalculator.getHumanReadableSize(getSize(), true);
+        builder.append(folder.getName()).append(" - ").append(size).append(System.lineSeparator()).append("\t");
+        for (Node child : children) {
+            if (child.getSize() < limit) {
+                continue;
+            }
+            String numSpaces = "\t".repeat(level);
+            builder.append(numSpaces).append(child.toString(limit));
+        }
+        return builder.toString();
+    }
 }
