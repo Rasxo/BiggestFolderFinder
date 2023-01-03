@@ -33,7 +33,6 @@ public class ParametersBag {
     }
 
     public String getPath() {
-
         return path;
     }
 }
