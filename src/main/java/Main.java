@@ -3,33 +3,25 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Main {
 
-    private static String[] sizeNames =
-            {"b", "kb", "Mb", "Gb", "Tb"};
-
     public static void main(String[] args) {
 
-        String folderPath = "D:\\Разобрать\\Steam";
+        String folderPath = "D:\\Charles";
         File file = new File(folderPath);
+        Node root = new Node(file);
 
         long start = System.currentTimeMillis();
 
-        FolderSizeCalculator calculator = new FolderSizeCalculator(file);
+        FolderSizeCalculator calculator = new FolderSizeCalculator(root);
         ForkJoinPool pool = new ForkJoinPool();
-        long size = pool.invoke(calculator);
-
-//        System.out.println(getFolderSize(file));
+        pool.invoke(calculator);
 
         long duration = System.currentTimeMillis() - start;
-        System.out.println("Размер папки / файла: " + size);
-        System.out.println("Размер папки / файла: " + getHumanReadableSize(size));
-        System.out.println("Размер папки / файла: " + getSizeFromHumanReadable(getHumanReadableSize(size)));
+        System.out.println("Размер папки / файла: " + root.getSize());
+        System.out.println("Размер папки / файла: " + SizeCalculator.getHumanReadableSize(root.getSize(), true));
+        System.out.println("Размер папки / файла: " +
+                SizeCalculator.getSizeFromHumanReadable(SizeCalculator.getHumanReadableSize(root.getSize(), false)));
         System.out.println("Время на выполнение расчета: " + duration + " ms");
-
-        //90833099156
-        //37963 ms
-
-        //90833099156
-        //417 ms
+        System.out.println("Содержимое: " + System.lineSeparator() + root);
 
     }
 
@@ -43,23 +35,5 @@ public class Main {
             sum += getFolderSize(file);
         }
         return sum;
-    }
-
-    public static String getHumanReadableSize(long length) {
-        int power = (int) (Math.log(length) / Math.log(1024));
-        double value = length / Math.pow(1024, power);
-        double roundedValue = Math.round(value * 100) / 100.;
-        return value + " " + sizeNames[power]; // для получения ответа в округленном виде - поменять value на roundedValue
-    }
-
-    public static long getSizeFromHumanReadable(String string) {
-        long result = 0L;
-        for (int i = 0; i <sizeNames.length; i++) {
-            if (string.contains(sizeNames[i])) {
-                double value = Double.parseDouble(string.replaceAll("[a-zA-Z]", ""));
-                result = (long) (value * Math.pow(1024, i));
-            }
-        }
-        return result;
     }
 }
