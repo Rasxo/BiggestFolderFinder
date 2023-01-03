@@ -23,11 +23,12 @@ public class Main {
 
         long duration = System.currentTimeMillis() - start;
         System.out.println("Размер папки / файла: " + root.getSize());
-        System.out.println("Размер папки / файла: " + SizeCalculator.getHumanReadableSize(root.getSize(), true));
-        System.out.println("Размер папки / файла: " +
-                SizeCalculator.getSizeFromHumanReadable(SizeCalculator.getHumanReadableSize(root.getSize(), false)));
+        System.out.println("Размер с округлением папки / файла: " + SizeCalculator.getHumanReadableSize(root.getSize(), true));
+        if (sizeLimit != 0l) {
+            System.out.println("Лимит для вывода содержимого: папки / файлы > " + SizeCalculator.getHumanReadableSize(sizeLimit, true));
+        }
         System.out.println("Время на выполнение расчета: " + duration + " ms");
-        System.out.println("Содержимое c лимитом: " + System.lineSeparator() + root);
+        System.out.println("Содержимое: " + System.lineSeparator() + root);
 
     }
 
